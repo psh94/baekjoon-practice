@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+
+        int T = Integer.parseInt(br.readLine()); // 테스트 케이스 개수
+
+        for (int i = 0; i < T; i++) {
+            String line = br.readLine();
+            sb.append(isValidParentheses(line) ? "YES\n" : "NO\n");
+        }
+
+        System.out.print(sb);
+    }
+
+    public static boolean isValidParentheses(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for (char ch : s.toCharArray()) {
+            if (ch == '(') {
+                stack.push(ch);
+            } else { // ch == ')'
+                if (stack.isEmpty()) return false; // 닫는 괄호가 먼저 나옴
+                stack.pop();
+            }
+        }
+        return stack.isEmpty(); // 스택이 비어있어야 VPS
+    }
+}
